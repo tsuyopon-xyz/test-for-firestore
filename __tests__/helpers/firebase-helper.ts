@@ -2,13 +2,10 @@ import * as firebase from '@firebase/rules-unit-testing';
 import fs from 'fs';
 import { resolve } from 'path';
 
-// const TEST_PROJECT_ID = 'test-for-firestore-id-for-test-suite';
-const TEST_PROJECT_ID = process.env.FIREBASE_PROJECT_ID as string;
-
 // "process.cwd()" outputs project root path
 // because of "npm test" is run at the project root.
 firebase.loadFirestoreRules({
-  projectId: TEST_PROJECT_ID,
+  projectId: process.env.FIREBASE_PROJECT_ID as string,
   rules: fs.readFileSync(resolve(process.cwd(), 'firestore.rules'), 'utf8'),
 });
 
@@ -19,7 +16,7 @@ type Auth = {
 
 const initializeDB = (auth?: Auth) => {
   const app = firebase.initializeTestApp({
-    projectId: TEST_PROJECT_ID,
+    projectId: process.env.FIREBASE_PROJECT_ID as string,
     auth,
   });
 
@@ -32,7 +29,7 @@ const deleteFirebaseApps = async () => {
 
 const clearFirestoreData = async () => {
   await firebase.clearFirestoreData({
-    projectId: TEST_PROJECT_ID,
+    projectId: process.env.FIREBASE_PROJECT_ID as string,
   });
 };
 
