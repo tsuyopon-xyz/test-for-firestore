@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "emu": "firebase emulators:start",
     "emu:firestore": "firebase emulators:start --only firestore"
   },
@@ -12,8 +12,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@firebase/rules-unit-testing": "^1.1.4",
     "@types/jest": "^26.0.16",
     "@types/node": "^14.14.10",
+    "dotenv": "^8.2.0",
     "jest": "^26.6.3",
     "ts-jest": "^26.4.4",
     "typescript": "^4.1.2"
@@ -33,6 +35,10 @@
     },
     "testMatch": [
       "**/__tests__/**/*.spec.ts"
-    ]
+    ],
+    "setupFiles": [
+      "dotenv/config"
+    ],
+    "testEnvironment": "node"
   }
 }
