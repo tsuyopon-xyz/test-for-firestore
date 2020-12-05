@@ -9,6 +9,11 @@ import {
 import { writeSingleDocument } from './helpers/firebase-admin-helper';
 
 describe('Jest動作確認テスト', () => {
+  beforeEach(async () => {
+    // Rest test data after finishing this test.
+    await clearFirestoreData();
+  });
+
   afterAll(async () => {
     // Rest test data after finishing this test.
     await clearFirestoreData();
@@ -90,6 +95,50 @@ describe('Jest動作確認テスト', () => {
     });
 
     const db = initializeDB();
+    const testDoc = db.collection(collection).doc(documentId);
+    await fbAssertSucceeds(testDoc.get());
+  });
+
+  it('Cannot read a single private post belonging to another user', async () => {
+    const collection = 'posts';
+    const documentId = 'private_post';
+    const data = {
+      authorId: 'another_user_id',
+      visibility: 'private',
+    };
+
+    await writeSingleDocument({
+      collection,
+      documentId,
+      data,
+    });
+
+    const db = initializeDB({
+      uid: 'test_user',
+      email: 'test@example.com',
+    });
+    const testDoc = db.collection(collection).doc(documentId);
+    await fbAssertFails(testDoc.get());
+  });
+
+  it('Can read a single private post belonging to me', async () => {
+    const collection = 'posts';
+    const documentId = 'private_post';
+    const data = {
+      authorId: 'test_user',
+      visibility: 'private',
+    };
+
+    await writeSingleDocument({
+      collection,
+      documentId,
+      data,
+    });
+
+    const db = initializeDB({
+      uid: data.authorId,
+      email: 'test@example.com',
+    });
     const testDoc = db.collection(collection).doc(documentId);
     await fbAssertSucceeds(testDoc.get());
   });

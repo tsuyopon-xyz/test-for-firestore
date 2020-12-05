@@ -1,3 +1,4 @@
+// This helper file is mainly aimed to prepare fixture data.
 import * as firebase from '@firebase/rules-unit-testing';
 
 type WriteDocumentInfo = {
