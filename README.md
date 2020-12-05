@@ -17,8 +17,11 @@ Firestore のエミュレーターを使って、ローカル環境でテスト�
 1. Firebase プロジェクトを用意する
 2. 1 で作成した Firebase プロジェクトで Firestore の準備まで追える
 3. firebase コマンドを実行できるようにする(Firebase CLI をインストールする)
-4. このレポジトリの `.env.example` をコピーして `.env` ファイルを作成する
-5. `.env` ファイルの `FIREBASE_PROJECT_ID` の値として、1 で作成し t あ Firebase プロジェクトのプロジェクト ID をセットする
+4. firebase init コマンドで `Firestore`、`Emulators` を選択する
+5. 4 の init コマンドの一連の流れの中で `Emulators Setup` まで進んだら `Firestore Emulator`を選択する
+6. Emulator UI を使いたい場合は、5 の選択をしたあとで、「エミュレータを今ダウンロードしますか？」という質問が出ると思うので `y` を押してエンターを押す
+7. このレポジトリの `.env.example` をコピーして `.env` ファイルを作成する
+8. `.env` ファイルの `FIREBASE_PROJECT_ID` の値として、1 で作成した Firebase プロジェクトのプロジェクト ID をセットする
 
 **補足**
 
@@ -29,8 +32,10 @@ Firestore のエミュレーターを使って、ローカル環境でテスト�
 ## このレポジトリのテストの実行の流れ
 
 ```sh
-# 1. Firestoreのエミュレーターを起動する
-$ npm run emu:firestore
+# 1. Firestoreのエミュレーターを起動する(以下2つの内いずれかでOK)
+$ npm run emu # 他のエミュレーターも選択している場合は、複数のエミュレータを起動できる
+$ npm run emu:firestore  #複数のエミュレーターを入れていても、firestoreエミュレータのみ起動する
+
 
 # 2. テストを実行する
 $ npm test
