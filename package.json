@@ -40,5 +40,8 @@
       "dotenv/config"
     ],
     "testEnvironment": "node"
+  },
+  "dependencies": {
+    "firebase-admin": "^9.4.1"
   }
 }

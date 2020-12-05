@@ -2,7 +2,8 @@ import * as firebase from '@firebase/rules-unit-testing';
 import fs from 'fs';
 import { resolve } from 'path';
 
-const TEST_PROJECT_ID = 'test-for-firestore-id-for-test-suite';
+// const TEST_PROJECT_ID = 'test-for-firestore-id-for-test-suite';
+const TEST_PROJECT_ID = process.env.FIREBASE_PROJECT_ID as string;
 
 // "process.cwd()" outputs project root path
 // because of "npm test" is run at the project root.

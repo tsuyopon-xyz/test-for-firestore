@@ -4,9 +4,6 @@
     "module": "commonjs",
     "strict": true,
     "baseUrl": ".",
-    "paths": {
-      "@test/*": ["./__tests__/*"]
-    },
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
